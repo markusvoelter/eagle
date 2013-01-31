@@ -4,6 +4,9 @@
     <modelRoot path="${solution_descriptor}/models" />
   </models>
   <sourcePath />
+  <usedLanguages>
+    <usedLanguage>5c7188f5-0d56-4f08-9a30-8aa984d84f0f(scenarios)</usedLanguage>
+  </usedLanguages>
   <usedDevKits>
     <usedDevKit>a4dac888-0788-4852-b4c0-f386bf6f2c0b(com.mbeddr.cc.reqtrace)</usedDevKit>
     <usedDevKit>24565007-e59f-42fc-ac10-da3836deec1c(com.mbeddr.components)</usedDevKit>

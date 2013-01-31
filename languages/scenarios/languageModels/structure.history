@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<history>
+  <StructureModification>
+    <dependencies>
+      <model index="c7l3" modelUID="r:0b08c2bb-6308-47a4-a1f0-b593032f8eeb(scenarios.structure)" version="-1" />
+    </dependencies>
+    <move id="c7l3.4115720392371294305" to="c7l3.4115720392371307873" />
+  </StructureModification>
+</history>
+
