@@ -2,10 +2,13 @@
 <model modelUID="r:ee9ec17b-58e9-464f-8a45-ac4d3b1b5c91(eagle.sandbox.m1)">
   <persistence version="7" />
   <language namespace="5c7188f5-0d56-4f08-9a30-8aa984d84f0f(scenarios)" />
+  <language namespace="112659a2-298b-43cb-91c9-810c178f3028(interrupts)" />
   <devkit namespace="d2a9c55c-6bdc-4cc2-97e1-4ba7552f5584(com.mbeddr.core)" />
   <devkit namespace="24565007-e59f-42fc-ac10-da3836deec1c(com.mbeddr.components)" />
   <devkit namespace="1a986be1-0ef0-4f9f-9d8a-81c3ea7227ae(com.mbeddr.physicalunits)" />
   <devkit namespace="a4dac888-0788-4852-b4c0-f386bf6f2c0b(com.mbeddr.cc.reqtrace)" />
+  <devkit namespace="2f7ba914-eed9-41bf-b0ae-6633a04a3894(com.mbeddr.statemachinesInComponents)" />
+  <devkit namespace="43d889ae-8e6a-4f6e-a649-d59342d8728d(com.mbeddr.statemachines)" />
   <import index="6c7a" modelUID="r:e3d58d9b-7fb0-4386-a68d-840050be235b(eagle.sandbox.req)" version="-1" />
   <import index="tpck" modelUID="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" version="0" implicit="yes" />
   <import index="k146" modelUID="r:5209fc71-bade-45c9-9079-f2d474f0d6ca(com.mbeddr.core.util.structure)" version="2" implicit="yes" />
@@ -24,6 +27,9 @@
   <import index="75wo" modelUID="r:eaa205a4-f15c-47d3-99e2-e648881b5997(com.mbeddr.cc.requirements.structure)" version="6" implicit="yes" />
   <import index="26ao" modelUID="r:7c15925b-a4a5-4da3-88aa-931a5a9ed982(com.mbeddr.cc.trace.structure)" version="3" implicit="yes" />
   <import index="c7l3" modelUID="r:0b08c2bb-6308-47a4-a1f0-b593032f8eeb(scenarios.structure)" version="0" implicit="yes" />
+  <import index="clqz" modelUID="r:5ebcdb77-81e9-4964-beae-35bd9a2f28b5(com.mbeddr.ext.statemachines.structure)" version="9" implicit="yes" />
+  <import index="8yj6" modelUID="r:b5ef41ef-8594-459c-bc08-a7e214c6fb43(com.mbeddr.ext.components.statemachine.structure)" version="0" implicit="yes" />
+  <import index="hrlm" modelUID="r:2442f138-dbff-4c74-99af-acb64aa13200(interrupts.structure)" version="-1" implicit="yes" />
   <roots>
     <node type="x27k.ImplementationModule" typeId="x27k.6437088627575722830" id="4115720392371293355">
       <property name="name" nameId="tpck.1169194664001" value="EagleTest" />
@@ -38,6 +44,9 @@
     <node type="ym4j.UnitContainer" typeId="ym4j.3801772042669047872" id="4115720392371293439" />
     <node type="x27k.ImplementationModule" typeId="x27k.6437088627575722830" id="4115720392371293546">
       <property name="name" nameId="tpck.1169194664001" value="VendingMachine" />
+    </node>
+    <node type="x27k.ImplementationModule" typeId="x27k.6437088627575722830" id="4115720392371345132">
+      <property name="name" nameId="tpck.1169194664001" value="Interrupts" />
     </node>
   </roots>
   <root id="4115720392371293355">
@@ -257,8 +266,11 @@
     <node role="configurationItems" roleId="vs0r.4459718605982007338" type="v7ag.ComponentsConfigItem" typeId="v7ag.2103658896110121032" id="4115720392371293733">
       <node role="genStrategy" roleId="v7ag.2103658896110238743" type="p7vm.NoMwComponentsGenStrategy" typeId="p7vm.2103658896110278831" id="4115720392371293735">
         <property name="generateContracts" nameId="p7vm.4768833643347725006" value="true" />
+        <property name="wireStatically" nameId="p7vm.1553713790141527405" value="true" />
+        <link role="instanceConfig" roleId="p7vm.1553713790141527407" targetNodeId="4115720392371293555" resolveInfo="vendingMachineInstances" />
       </node>
     </node>
+    <node role="configurationItems" roleId="vs0r.4459718605982007338" type="8yj6.StatemachineInCompsConfigItem" typeId="8yj6.1656687801206464316" id="4115720392371338107" />
     <node role="binaries" roleId="51wr.5046689135694070731" type="51wr.Executable" typeId="51wr.5046689135693761554" id="4115720392371293416">
       <property name="isTest" nameId="51wr.3431613015799084476" value="true" />
       <property name="name" nameId="tpck.1169194664001" value="EagleTest" />
@@ -270,6 +282,9 @@
       </node>
       <node role="referencedModules" roleId="51wr.5046689135693761559" type="51wr.ModuleRef" typeId="51wr.7717755763392524107" id="4115720392371293577">
         <link role="module" roleId="51wr.7717755763392524108" targetNodeId="4115720392371293428" resolveInfo="Payment" />
+      </node>
+      <node role="referencedModules" roleId="51wr.5046689135693761559" type="51wr.ModuleRef" typeId="51wr.7717755763392524107" id="4115720392371350284">
+        <link role="module" roleId="51wr.7717755763392524108" targetNodeId="4115720392371345132" resolveInfo="Interrupts" />
       </node>
     </node>
   </root>
@@ -551,6 +566,40 @@
     <node role="contents" roleId="x27k.6437088627575722833" type="x27k.EmptyModuleContent" typeId="x27k.8934095934011938595" id="4115720392371293547">
       <property name="name" nameId="tpck.1169194664001" value="empty_1359629108526_5" />
     </node>
+    <node role="contents" roleId="x27k.6437088627575722833" type="x27k.EmptyModuleContent" typeId="x27k.8934095934011938595" id="4115720392371344552">
+      <property name="name" nameId="tpck.1169194664001" value="empty_1359641770005_1" />
+    </node>
+    <node role="contents" roleId="x27k.6437088627575722833" type="x27k.EmptyModuleContent" typeId="x27k.8934095934011938595" id="4115720392371328981">
+      <property name="name" nameId="tpck.1169194664001" value="empty_1359640154865_1" />
+    </node>
+    <node role="contents" roleId="x27k.6437088627575722833" type="v7ag.ClientServerInterface" typeId="v7ag.4491876417845484922" id="4115720392371328984">
+      <property name="exported" nameId="x27k.1317894735999272944" value="true" />
+      <property name="name" nameId="tpck.1169194664001" value="MachineDriver" />
+      <node role="contents" roleId="v7ag.4491876417845484926" type="v7ag.Operation" typeId="v7ag.4491876417845484924" id="4115720392371328985">
+        <property name="name" nameId="tpck.1169194664001" value="dispendNextBottle" />
+        <node role="type" roleId="mj1l.318113533128716676" type="mj1l.VoidType" typeId="mj1l.7892328519581699353" id="4115720392371328986">
+          <property name="volatile" nameId="mj1l.2941277002448691247" value="false" />
+          <property name="const" nameId="mj1l.2941277002445651368" value="false" />
+        </node>
+      </node>
+      <node role="contents" roleId="v7ag.4491876417845484926" type="v7ag.Operation" typeId="v7ag.4491876417845484924" id="4115720392371329022">
+        <property name="name" nameId="tpck.1169194664001" value="blinkLED" />
+        <node role="type" roleId="mj1l.318113533128716676" type="mj1l.VoidType" typeId="mj1l.7892328519581699353" id="4115720392371329023">
+          <property name="volatile" nameId="mj1l.2941277002448691247" value="false" />
+          <property name="const" nameId="mj1l.2941277002445651368" value="false" />
+        </node>
+      </node>
+      <node role="contents" roleId="v7ag.4491876417845484926" type="v7ag.Operation" typeId="v7ag.4491876417845484924" id="4115720392371329044">
+        <property name="name" nameId="tpck.1169194664001" value="dropChange" />
+        <node role="type" roleId="mj1l.318113533128716676" type="mj1l.VoidType" typeId="mj1l.7892328519581699353" id="4115720392371329045">
+          <property name="volatile" nameId="mj1l.2941277002448691247" value="false" />
+          <property name="const" nameId="mj1l.2941277002445651368" value="false" />
+        </node>
+      </node>
+    </node>
+    <node role="contents" roleId="x27k.6437088627575722833" type="x27k.EmptyModuleContent" typeId="x27k.8934095934011938595" id="4115720392371328983">
+      <property name="name" nameId="tpck.1169194664001" value="empty_1359640155634_3" />
+    </node>
     <node role="contents" roleId="x27k.6437088627575722833" type="v7ag.AtomicComponent" typeId="v7ag.4491876417845649011" id="4115720392371293550">
       <property name="exported" nameId="x27k.1317894735999272944" value="true" />
       <property name="name" nameId="tpck.1169194664001" value="Machine" />
@@ -558,6 +607,206 @@
         <property name="name" nameId="tpck.1169194664001" value="paymentHandler" />
         <link role="intf" roleId="v7ag.4491876417845484932" targetNodeId="4115720392371293433" resolveInfo="PaymentHandler" />
       </node>
+      <node role="contents" roleId="v7ag.6041318036221669720" type="v7ag.RequiredPort" typeId="v7ag.4491876417845628841" id="4115720392371328988">
+        <property name="name" nameId="tpck.1169194664001" value="driver" />
+        <property name="optional" nameId="v7ag.349917904115138509" value="true" />
+        <link role="intf" roleId="v7ag.4491876417845484932" targetNodeId="4115720392371328984" resolveInfo="MachineDriver" />
+      </node>
+      <node role="contents" roleId="v7ag.6041318036221669720" type="v7ag.EmptyComponentContent" typeId="v7ag.8515777736166878876" id="4115720392371328957" />
+      <node role="contents" roleId="v7ag.6041318036221669720" type="8yj6.StatemachineComponentAdapter" typeId="8yj6.8663730687027689188" id="4115720392371328960">
+        <node role="machine" roleId="8yj6.8663730687027689238" type="clqz.Statemachine" typeId="clqz.5778488248013533809" id="4115720392371328961">
+          <property name="name" nameId="tpck.1169194664001" value="VendingMachine" />
+          <link role="initial" roleId="clqz.5778488248013533842" targetNodeId="4115720392371328962" resolveInfo="booted" />
+          <node role="contents" roleId="clqz.7835233251114737454" type="clqz.InEvent" typeId="clqz.4643433264760980253" id="4115720392371328964">
+            <property name="name" nameId="tpck.1169194664001" value="buttonPressed" />
+            <node role="args" roleId="clqz.1786180596061248896" type="clqz.EventArg" typeId="clqz.1786180596061248885" id="4115720392371328970">
+              <property name="name" nameId="tpck.1169194664001" value="moneyAmount" />
+              <node role="type" roleId="mj1l.318113533128716676" type="mj1l.UnsignedInt8tType" typeId="mj1l.8463282783691618461" id="4115720392371328971">
+                <property name="volatile" nameId="mj1l.2941277002448691247" value="false" />
+                <property name="const" nameId="mj1l.2941277002445651368" value="false" />
+              </node>
+            </node>
+          </node>
+          <node role="contents" roleId="clqz.7835233251114737454" type="clqz.InEvent" typeId="clqz.4643433264760980253" id="4115720392371328999">
+            <property name="name" nameId="tpck.1169194664001" value="reset" />
+          </node>
+          <node role="contents" roleId="clqz.7835233251114737454" type="clqz.State" typeId="clqz.5778488248013533839" id="4115720392371328969">
+            <property name="name" nameId="tpck.1169194664001" value="dropDrink" />
+            <node role="contents" roleId="clqz.4249345261280348989" type="clqz.EntryAction" typeId="clqz.4753668641245534592" id="4115720392371328979">
+              <node role="body" roleId="clqz.4753668641245545015" type="clqz.ActionList" typeId="clqz.1957198122968598264" id="4115720392371328980">
+                <node role="statements" roleId="c4fa.4185783222026475862" type="v7ag.WhenPortConnectedStatement" typeId="v7ag.5308710777891663531" id="4115720392371329075">
+                  <link role="port" roleId="v7ag.5308710777891663532" targetNodeId="4115720392371328988" resolveInfo="driver" />
+                  <node role="body" roleId="v7ag.5308710777891663533" type="c4fa.StatementList" typeId="c4fa.4185783222026475861" id="4115720392371329076">
+                    <node role="statements" roleId="c4fa.4185783222026475862" type="c4fa.ExpressionStatement" typeId="c4fa.7254843406768833938" id="4115720392371328989">
+                      <node role="expr" roleId="c4fa.7254843406768833939" type="v7ag.RequiredPortOpCallExpr" typeId="v7ag.466603768608442377" id="4115720392371328994">
+                        <link role="operation" roleId="v7ag.8105003328815071752" targetNodeId="4115720392371328985" resolveInfo="dispendNextBottle" />
+                        <node role="expression" roleId="mj1l.7254843406768839760" type="v7ag.PortRefExpr" typeId="v7ag.8105003328815208362" id="4115720392371328990">
+                          <link role="port" roleId="v7ag.8105003328815208363" targetNodeId="4115720392371328988" resolveInfo="driver" />
+                        </node>
+                      </node>
+                    </node>
+                  </node>
+                </node>
+                <node role="statements" roleId="c4fa.4185783222026475862" type="clqz.TriggerSelfStatement" typeId="clqz.1582169519237884298" id="4115720392371328996">
+                  <link role="event" roleId="clqz.1582169519237884299" targetNodeId="4115720392371328999" resolveInfo="reset" />
+                </node>
+              </node>
+            </node>
+            <node role="contents" roleId="clqz.4249345261280348989" type="clqz.Transition" typeId="clqz.5778488248013533883" id="4115720392371329002">
+              <link role="targetState" roleId="clqz.5778488248013533913" targetNodeId="4115720392371328962" resolveInfo="booted" />
+              <node role="trigger" roleId="clqz.3670856444174351950" type="clqz.Trigger" typeId="clqz.1786180596061233739" id="4115720392371329004">
+                <link role="event" roleId="clqz.8951398808641876049" targetNodeId="4115720392371328999" resolveInfo="reset" />
+              </node>
+            </node>
+          </node>
+          <node role="contents" roleId="clqz.7835233251114737454" type="clqz.State" typeId="clqz.5778488248013533839" id="4115720392371328962">
+            <property name="name" nameId="tpck.1169194664001" value="booted" />
+            <node role="contents" roleId="clqz.4249345261280348989" type="clqz.Transition" typeId="clqz.5778488248013533883" id="4115720392371328965">
+              <link role="targetState" roleId="clqz.5778488248013533913" targetNodeId="4115720392371328969" resolveInfo="dropDrink" />
+              <node role="trigger" roleId="clqz.3670856444174351950" type="clqz.Trigger" typeId="clqz.1786180596061233739" id="4115720392371328967">
+                <link role="event" roleId="clqz.8951398808641876049" targetNodeId="4115720392371328964" resolveInfo="buttonPressed" />
+              </node>
+              <node role="guard" roleId="clqz.5778488248013533903" type="mj1l.GreaterExpression" typeId="mj1l.8860443239512147445" id="4115720392371329037">
+                <node role="left" roleId="mj1l.8860443239512128064" type="clqz.EventArgRef" typeId="clqz.1786180596061258962" id="4115720392371329038">
+                  <link role="arg" roleId="clqz.1786180596061258963" targetNodeId="4115720392371328970" resolveInfo="moneyAmount" />
+                </node>
+                <node role="right" roleId="mj1l.8860443239512128065" type="c7l3.ConstantRef" typeId="c7l3.4115720392371311281" id="4115720392371329039">
+                  <link role="constant" roleId="c7l3.4115720392371311282" targetNodeId="6c7a.4115720392371299022" resolveInfo="REQ_PRICE" />
+                </node>
+              </node>
+              <node role="actions" roleId="clqz.5778488248013533907" type="c4fa.StatementList" typeId="c4fa.4185783222026475861" id="4115720392371329046">
+                <node role="statements" roleId="c4fa.4185783222026475862" type="c4fa.ExpressionStatement" typeId="c4fa.7254843406768833938" id="4115720392371329070">
+                  <node role="expr" roleId="c4fa.7254843406768833939" type="v7ag.RequiredPortOpCallExpr" typeId="v7ag.466603768608442377" id="4115720392371329071">
+                    <link role="operation" roleId="v7ag.8105003328815071752" targetNodeId="4115720392371293449" resolveInfo="pay" />
+                    <node role="expression" roleId="mj1l.7254843406768839760" type="v7ag.PortRefExpr" typeId="v7ag.8105003328815208362" id="4115720392371329072">
+                      <link role="port" roleId="v7ag.8105003328815208363" targetNodeId="4115720392371293551" resolveInfo="paymentHandler" />
+                    </node>
+                    <node role="actuals" roleId="v7ag.8105003328815091213" type="c7l3.ConstantRef" typeId="c7l3.4115720392371311281" id="4115720392371329073">
+                      <link role="constant" roleId="c7l3.4115720392371311282" targetNodeId="6c7a.4115720392371299022" resolveInfo="REQ_PRICE" />
+                    </node>
+                    <node role="actuals" roleId="v7ag.8105003328815091213" type="clqz.EventArgRef" typeId="clqz.1786180596061258962" id="4115720392371329074">
+                      <link role="arg" roleId="clqz.1786180596061258963" targetNodeId="4115720392371328970" resolveInfo="moneyAmount" />
+                    </node>
+                  </node>
+                </node>
+                <node role="statements" roleId="c4fa.4185783222026475862" type="c4fa.ExpressionStatement" typeId="c4fa.7254843406768833938" id="4115720392371329048">
+                  <node role="expr" roleId="c4fa.7254843406768833939" type="v7ag.RequiredPortOpCallExpr" typeId="v7ag.466603768608442377" id="4115720392371329052">
+                    <link role="operation" roleId="v7ag.8105003328815071752" targetNodeId="4115720392371293444" resolveInfo="returnChange" />
+                    <node role="expression" roleId="mj1l.7254843406768839760" type="v7ag.PortRefExpr" typeId="v7ag.8105003328815208362" id="4115720392371329049">
+                      <link role="port" roleId="v7ag.8105003328815208363" targetNodeId="4115720392371293551" resolveInfo="paymentHandler" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <node role="contents" roleId="clqz.4249345261280348989" type="clqz.Transition" typeId="clqz.5778488248013533883" id="4115720392371329032">
+              <link role="targetState" roleId="clqz.5778488248013533913" targetNodeId="4115720392371328969" resolveInfo="dropDrink" />
+              <node role="trigger" roleId="clqz.3670856444174351950" type="clqz.Trigger" typeId="clqz.1786180596061233739" id="4115720392371329033">
+                <link role="event" roleId="clqz.8951398808641876049" targetNodeId="4115720392371328964" resolveInfo="buttonPressed" />
+              </node>
+              <node role="guard" roleId="clqz.5778488248013533903" type="mj1l.EqualsExpression" typeId="mj1l.8860443239512129322" id="4115720392371329034">
+                <node role="left" roleId="mj1l.8860443239512128064" type="clqz.EventArgRef" typeId="clqz.1786180596061258962" id="4115720392371329035">
+                  <link role="arg" roleId="clqz.1786180596061258963" targetNodeId="4115720392371328970" resolveInfo="moneyAmount" />
+                </node>
+                <node role="right" roleId="mj1l.8860443239512128065" type="c7l3.ConstantRef" typeId="c7l3.4115720392371311281" id="4115720392371329036">
+                  <link role="constant" roleId="c7l3.4115720392371311282" targetNodeId="6c7a.4115720392371299022" resolveInfo="REQ_PRICE" />
+                </node>
+              </node>
+              <node role="actions" roleId="clqz.5778488248013533907" type="c4fa.StatementList" typeId="c4fa.4185783222026475861" id="4115720392371329060">
+                <node role="statements" roleId="c4fa.4185783222026475862" type="c4fa.ExpressionStatement" typeId="c4fa.7254843406768833938" id="4115720392371329061">
+                  <node role="expr" roleId="c4fa.7254843406768833939" type="v7ag.RequiredPortOpCallExpr" typeId="v7ag.466603768608442377" id="4115720392371329065">
+                    <link role="operation" roleId="v7ag.8105003328815071752" targetNodeId="4115720392371293449" resolveInfo="pay" />
+                    <node role="expression" roleId="mj1l.7254843406768839760" type="v7ag.PortRefExpr" typeId="v7ag.8105003328815208362" id="4115720392371329062">
+                      <link role="port" roleId="v7ag.8105003328815208363" targetNodeId="4115720392371293551" resolveInfo="paymentHandler" />
+                    </node>
+                    <node role="actuals" roleId="v7ag.8105003328815091213" type="c7l3.ConstantRef" typeId="c7l3.4115720392371311281" id="4115720392371329066">
+                      <link role="constant" roleId="c7l3.4115720392371311282" targetNodeId="6c7a.4115720392371299022" resolveInfo="REQ_PRICE" />
+                    </node>
+                    <node role="actuals" roleId="v7ag.8105003328815091213" type="clqz.EventArgRef" typeId="clqz.1786180596061258962" id="4115720392371329068">
+                      <link role="arg" roleId="clqz.1786180596061258963" targetNodeId="4115720392371328970" resolveInfo="moneyAmount" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <node role="contents" roleId="clqz.4249345261280348989" type="clqz.Transition" typeId="clqz.5778488248013533883" id="4115720392371329006">
+              <link role="targetState" roleId="clqz.5778488248013533913" targetNodeId="4115720392371328962" resolveInfo="booted" />
+              <node role="trigger" roleId="clqz.3670856444174351950" type="clqz.Trigger" typeId="clqz.1786180596061233739" id="4115720392371329008">
+                <link role="event" roleId="clqz.8951398808641876049" targetNodeId="4115720392371328964" resolveInfo="buttonPressed" />
+              </node>
+              <node role="guard" roleId="clqz.5778488248013533903" type="mj1l.LessExpression" typeId="mj1l.8860443239512147449" id="4115720392371329012">
+                <node role="right" roleId="mj1l.8860443239512128065" type="c7l3.ConstantRef" typeId="c7l3.4115720392371311281" id="4115720392371329015">
+                  <link role="constant" roleId="c7l3.4115720392371311282" targetNodeId="6c7a.4115720392371299022" resolveInfo="REQ_PRICE" />
+                </node>
+                <node role="left" roleId="mj1l.8860443239512128064" type="clqz.EventArgRef" typeId="clqz.1786180596061258962" id="4115720392371329009">
+                  <link role="arg" roleId="clqz.1786180596061258963" targetNodeId="4115720392371328970" resolveInfo="moneyAmount" />
+                </node>
+              </node>
+              <node role="actions" roleId="clqz.5778488248013533907" type="c4fa.StatementList" typeId="c4fa.4185783222026475861" id="4115720392371329019">
+                <node role="statements" roleId="c4fa.4185783222026475862" type="v7ag.WhenPortConnectedStatement" typeId="v7ag.5308710777891663531" id="4115720392371342463">
+                  <link role="port" roleId="v7ag.5308710777891663532" targetNodeId="4115720392371328988" resolveInfo="driver" />
+                  <node role="body" roleId="v7ag.5308710777891663533" type="c4fa.StatementList" typeId="c4fa.4185783222026475861" id="4115720392371342464">
+                    <node role="statements" roleId="c4fa.4185783222026475862" type="c4fa.ExpressionStatement" typeId="c4fa.7254843406768833938" id="4115720392371329024">
+                      <node role="expr" roleId="c4fa.7254843406768833939" type="v7ag.RequiredPortOpCallExpr" typeId="v7ag.466603768608442377" id="4115720392371329028">
+                        <link role="operation" roleId="v7ag.8105003328815071752" targetNodeId="4115720392371329022" resolveInfo="blinkLED" />
+                        <node role="expression" roleId="mj1l.7254843406768839760" type="v7ag.PortRefExpr" typeId="v7ag.8105003328815208362" id="4115720392371329025">
+                          <link role="port" roleId="v7ag.8105003328815208363" targetNodeId="4115720392371328988" resolveInfo="driver" />
+                        </node>
+                      </node>
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+      <node role="contents" roleId="v7ag.6041318036221669720" type="v7ag.EmptyComponentContent" typeId="v7ag.8515777736166878876" id="4115720392371328958" />
+      <node role="contents" roleId="v7ag.6041318036221669720" type="v7ag.Field" typeId="v7ag.5308710777891512019" id="4115720392371342458">
+        <property name="name" nameId="tpck.1169194664001" value="sm" />
+        <node role="type" roleId="mj1l.318113533128716676" type="clqz.StatemachineType" typeId="clqz.7851711690674263345" id="4115720392371342459">
+          <link role="machine" roleId="clqz.7851711690674263346" targetNodeId="4115720392371328961" resolveInfo="VendingMachine" />
+        </node>
+      </node>
+      <node role="contents" roleId="v7ag.6041318036221669720" type="v7ag.EmptyComponentContent" typeId="v7ag.8515777736166878876" id="4115720392371342457" />
+      <node role="contents" roleId="v7ag.6041318036221669720" type="v7ag.Runnable" typeId="v7ag.4491876417845641670" id="4115720392371342452">
+        <property name="name" nameId="tpck.1169194664001" value="boot" />
+        <node role="body" roleId="v7ag.4491876417845689763" type="c4fa.StatementList" typeId="c4fa.4185783222026475861" id="4115720392371342453">
+          <node role="statements" roleId="c4fa.4185783222026475862" type="clqz.InitializeSMStatement" typeId="clqz.1786180596061208520" id="4115720392371342460">
+            <node role="statemachine" roleId="clqz.1786180596061208522" type="v7ag.FieldRef" typeId="v7ag.5308710777891565561" id="4115720392371342462">
+              <link role="field" roleId="v7ag.5308710777891565562" targetNodeId="4115720392371342458" resolveInfo="sm" />
+            </node>
+          </node>
+        </node>
+        <node role="type" roleId="mj1l.318113533128716676" type="mj1l.VoidType" typeId="mj1l.7892328519581699353" id="4115720392371342451">
+          <property name="volatile" nameId="mj1l.2941277002448691247" value="false" />
+          <property name="const" nameId="mj1l.2941277002445651368" value="false" />
+        </node>
+        <node role="trigger" roleId="v7ag.4491876417845643892" type="v7ag.OnInitTrigger" typeId="v7ag.4643433264761566506" id="4115720392371342455" />
+      </node>
+      <node role="contents" roleId="v7ag.6041318036221669720" type="v7ag.EmptyComponentContent" typeId="v7ag.8515777736166878876" id="4115720392371342447" />
+      <node role="contents" roleId="v7ag.6041318036221669720" type="v7ag.Runnable" typeId="v7ag.4491876417845641670" id="4115720392371345309">
+        <property name="name" nameId="tpck.1169194664001" value="moneyInserted" />
+        <node role="body" roleId="v7ag.4491876417845689763" type="c4fa.StatementList" typeId="c4fa.4185783222026475861" id="4115720392371345310">
+          <node role="statements" roleId="c4fa.4185783222026475862" type="clqz.TriggerSMStatement" typeId="clqz.7851711690674279259" id="4115720392371346676">
+            <link role="event" roleId="clqz.1786180596061231919" targetNodeId="4115720392371328964" resolveInfo="buttonPressed" />
+            <node role="statemachine" roleId="clqz.7851711690674279260" type="v7ag.FieldRef" typeId="v7ag.5308710777891565561" id="4115720392371346678">
+              <link role="field" roleId="v7ag.5308710777891565562" targetNodeId="4115720392371342458" resolveInfo="sm" />
+            </node>
+            <node role="args" roleId="clqz.2558982571829095260" type="mj1l.NumberLiteral" typeId="mj1l.8860443239512128103" id="4115720392371346681">
+              <property name="value" nameId="mj1l.8860443239512128104" value="10" />
+            </node>
+          </node>
+        </node>
+        <node role="type" roleId="mj1l.318113533128716676" type="mj1l.VoidType" typeId="mj1l.7892328519581699353" id="4115720392371345308">
+          <property name="volatile" nameId="mj1l.2941277002448691247" value="false" />
+          <property name="const" nameId="mj1l.2941277002445651368" value="false" />
+        </node>
+        <node role="trigger" roleId="v7ag.4491876417845643892" type="hrlm.InterruptTrigger" typeId="hrlm.4115720392371345312" id="4115720392371346675">
+          <link role="interrupt" roleId="hrlm.4115720392371345335" targetNodeId="4115720392371345137" resolveInfo="__interrupt_12" />
+        </node>
+      </node>
+      <node role="contents" roleId="v7ag.6041318036221669720" type="v7ag.EmptyComponentContent" typeId="v7ag.8515777736166878876" id="4115720392371342449" />
       <node role="contents" roleId="v7ag.6041318036221669720" type="v7ag.Runnable" typeId="v7ag.4491876417845641670" id="4115720392371315665">
         <property name="name" nameId="tpck.1169194664001" value="testPayment" />
         <node role="body" roleId="v7ag.4491876417845689763" type="c4fa.StatementList" typeId="c4fa.4185783222026475861" id="4115720392371315666">
@@ -709,10 +958,29 @@
     <node role="imports" roleId="x27k.1317894735999304826" type="x27k.ModuleImport" typeId="x27k.1317894735999299713" id="4115720392371293552">
       <link role="module" roleId="x27k.1317894735999299714" targetNodeId="4115720392371293428" resolveInfo="Payment" />
     </node>
+    <node role="imports" roleId="x27k.1317894735999304826" type="x27k.ModuleImport" typeId="x27k.1317894735999299713" id="4115720392371349627">
+      <link role="module" roleId="x27k.1317894735999299714" targetNodeId="4115720392371345132" resolveInfo="Interrupts" />
+    </node>
     <node role="smodelAttribute" roleId="tpck.5169995583184591170" type="75wo.ReqModuleRefAttribute" typeId="75wo.3402431285977874460" id="4115720392371324001">
       <node role="refs" roleId="26ao.439567521322959424" type="26ao.TraceTargetProviderRef" typeId="26ao.439567521322959422" id="4115720392371324002">
         <link role="provider" roleId="26ao.439567521322959423" targetNodeId="6c7a.4115720392371293421" resolveInfo="GetraenkeautomatReq" />
       </node>
+    </node>
+  </root>
+  <root id="4115720392371345132">
+    <node role="contents" roleId="x27k.6437088627575722833" type="x27k.EmptyModuleContent" typeId="x27k.8934095934011938595" id="4115720392371345133">
+      <property name="name" nameId="tpck.1169194664001" value="empty_1359641878574_1" />
+    </node>
+    <node role="contents" roleId="x27k.6437088627575722833" type="hrlm.InterruptDecl" typeId="hrlm.4115720392371344553" id="4115720392371345137">
+      <property name="intNo" nameId="hrlm.4115720392371344555" value="12" />
+      <property name="exported" nameId="x27k.1317894735999272944" value="true" />
+    </node>
+    <node role="contents" roleId="x27k.6437088627575722833" type="hrlm.InterruptDecl" typeId="hrlm.4115720392371344553" id="4115720392371345305">
+      <property name="intNo" nameId="hrlm.4115720392371344555" value="13" />
+      <property name="exported" nameId="x27k.1317894735999272944" value="true" />
+    </node>
+    <node role="contents" roleId="x27k.6437088627575722833" type="x27k.EmptyModuleContent" typeId="x27k.8934095934011938595" id="4115720392371345306">
+      <property name="name" nameId="tpck.1169194664001" value="empty_1359642013114_1" />
     </node>
   </root>
 </model>
